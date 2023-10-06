@@ -1,30 +1,36 @@
 const sun = document.getElementById("sun");
 const earth = document.getElementById("earth");
 const moon = document.getElementById("moon");
+const earthSpin = document.querySelector(".earth-spin");
+const moonOrbit = document.querySelector(".moon-orbit"); // Select the moon's orbit container
+const moonSpin = document.getElementById("moon-spin");
 
-let earthAngle = 0;
-let moonAngle = 0;
+const now = new Date();
+const dayOfYear = Math.floor(
+    (now - new Date(now.getFullYear(), 0, 0)) / 86400000
+);
 
-const earthOrbitRadius = 100;
-const moonOrbitRadius = 20;
+const earthPosition = (179 + dayOfYear) % 360;
+const rotationValue = earthPosition + 360;
 
-function animate() {
-    earthAngle += 0.5; // Adjust the speed of Earth's orbit
-    moonAngle += 1;   // Adjust the speed of Moon's orbit
+// Create a <style> element to add the keyframes
+const styleElement = document.createElement('style');
+styleElement.type = 'text/css';
 
-    const earthX = earthOrbitRadius * Math.cos((earthAngle * Math.PI) / 180);
-    const earthY = earthOrbitRadius * Math.sin((earthAngle * Math.PI) / 180);
+document.head.appendChild(styleElement);
 
-    const moonX = earthX + moonOrbitRadius * Math.cos((moonAngle * Math.PI) / 180);
-    const moonY = earthY + moonOrbitRadius * Math.sin((moonAngle * Math.PI) / 180);
+// Define the keyframes dynamically based on the calculated rotationValue
+const keyframes = `
+  @keyframes spin-right {
+    100% {
+      transform: rotate(${rotationValue}deg);
+    }
+  }
+`;
 
-    earth.style.left = earthX + "px";
-    earth.style.top = earthY + "px";
+// Add the keyframes to the <style> element's stylesheet
+styleElement.textContent = keyframes;
 
-    moon.style.left = moonX + "px";
-    moon.style.top = moonY + "px";
-
-    requestAnimationFrame(animate);
-}
-
-animate();
+// Apply the rotation to the Earth and Moon
+earthSpin.style.transform = `rotate(${earthPosition}deg)`;
+moonSpin.style.transform = `rotate(${earthPosition}deg)`;

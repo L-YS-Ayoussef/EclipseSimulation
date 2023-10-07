@@ -1,3 +1,8 @@
+:root {
+    --earthPosition: 0;
+    --rotationValue: 0; /* Define a custom property for rotation */
+}
+  
 html,
 body {
     background-color: #121215;
@@ -89,7 +94,7 @@ body {
 }
 
 
-@keyframes spin-right {
+ @keyframes spin-right {
     100% {
         transform: rotate(360deg);
     }
@@ -126,6 +131,7 @@ body {
 .control-panel button:hover {
     opacity: 0.8;
 }
+
 
 #start-button {
     background-color: #4CAF50;

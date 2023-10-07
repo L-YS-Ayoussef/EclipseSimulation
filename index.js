@@ -12,11 +12,21 @@ const moonSpin = document.querySelector('.moon-spin');
 let earthAnimation;
 let earthRotateAnimation;
 let moonAnimation;
+let intervalId;
+
+const initialDate = new Date();
+const currentDate = new Date();
+
 
 function startAnimations() {
     earthSpin.style.animation = 'spin-right 109.5s linear infinite';
     earthRotate.style.animation = 'spin-right 109.5s linear infinite, rotate-earth 10s linear infinite';
     moonSpin.style.animation = 'spin-right 3s linear infinite'; 
+
+    intervalId = setInterval(function() {
+        incrementDate();
+    }, 300); // 5000 milliseconds = 5 seconds
+        
 }
 
 function pauseAnimations() {
@@ -25,6 +35,9 @@ function pauseAnimations() {
     moonSpin.style.animationPlayState = 'paused';
 
     resumeButton.style.display = "inline-block";
+
+    clearInterval(intervalId);
+
 }
 
 function resumeAnimations() {
@@ -33,12 +46,24 @@ function resumeAnimations() {
     moonSpin.style.animationPlayState = 'running';
 
     resumeButton.style.display = "none";
+
+    intervalId = setInterval(function() {
+        incrementDate();
+    }, 300); // 5000 milliseconds = 5 seconds
+    
+    
 }
 
 function resetAnimations() {
     earthSpin.style.animation = null;
     earthRotate.style.animation = null;
     moonSpin.style.animation = null;
+    
+    clearInterval(intervalId);
+    
+
+    currentDate.setTime(initialDate.getTime());
+    displayDate();
 }
 
 function speedUpAnimation() {
@@ -111,3 +136,37 @@ styleElement.textContent = keyframes;
 // Apply the rotation to the Earth and Moon
 earthSpin.style.transform = `rotate(${earthPosition}deg)`;
 moonSpin.style.transform = `rotate(${earthPosition}deg)`;
+
+
+function displayDate() {
+    // const currentDate = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('dateDisplay').textContent = currentDate.toLocaleDateString(undefined, options);
+}
+
+
+function incrementDate() {
+    currentDate.setDate(currentDate.getDate() + 1);
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('dateDisplay').textContent = currentDate.toLocaleDateString(undefined, options);
+}
+
+
+//displayDate();
+
+function startAutoIncrement() {
+
+
+
+}
+
+// Start the auto-increment process when the page loads
+displayDate();
+
+
+// intervalId = setInterval(function() {
+//     incrementDate();
+// }, 300); // 5000 milliseconds = 5 seconds
+
+
+// clearInterval(intervalId);

@@ -78,8 +78,8 @@ body {
 #moon {
     margin-top: -30px;
     margin-left: -30px;
-    height: 55px;
-    width: 55px;
+    height: 39px;
+    width: 39px;
     border-radius: 50%;
     background: white;
     box-shadow: 0 0 14px #3a4385;
@@ -165,3 +165,20 @@ body {
 }
 
 
+.date
+{
+    position: absolute;
+    top: 11%;
+    left: 5%;
+    font-size: 41px;
+    color:white;
+}
+
+#dateDisplay
+{
+    position: absolute;
+    top: 23%;
+    left: 5%;
+    font-size: 41px;
+    color:white;
+}

@@ -6,6 +6,8 @@
 html,
 body {
     background-color: #121215;
+        font-family: 'Space Mono';
+    
 }
 
 .solar-system {
@@ -134,34 +136,63 @@ body {
 
 
 #start-button {
-    background-color: #4CAF50;
+    background-color: transparent;
     color: white;
+    border: solid white 1px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+
 }
 
 #pause-button {
-    background-color: #FF5733;
+    background-color: transparent;
     color: white;
+    border: solid white 1px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+
 }
 
 #resume-button {
-    background-color: gray;
+    background-color: transparent;
     color: white;
-    display: none;
+    border: solid white 1px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+
 }
 
 #reset-button {
-    background-color: #3498DB;
+    background-color: transparent;
     color: white;
+    border: solid white 1px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+
 }
 
 #speed-up-button {
-    background-color: #F1C40F;
+    background-color: transparent;
     color: white;
+    border: solid white 1px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+
 }
 
 #slow-down-button {
-    background-color: #8E44AD;
+    background-color: transparent;
     color: white;
+    border: solid white 1px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+
 }
 
 
@@ -179,6 +210,6 @@ body {
     position: absolute;
     top: 23%;
     left: 5%;
-    font-size: 41px;
+    font-size: 31px;
     color:white;
 }

@@ -137,6 +137,32 @@ body {
     }
 }
 
+@keyframes backgroundChange2 {
+    0% {
+        background: white;
+    }
+
+    25% {
+        background: #999;
+        /* Color 1 */
+    }
+
+    50% {
+        background: #666;
+        /* Color 2 */
+    }
+
+    75% {
+        background: #333;
+        /* Color 3 */
+    }
+
+    100% {
+        background: black;
+    }
+}
+
+
 .control-panel {
     margin-top: 30px;
     margin-left: 20px;

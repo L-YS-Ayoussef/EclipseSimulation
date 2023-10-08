@@ -40,6 +40,9 @@ function pauseAnimations() {
 
 }
 
+let lunarOn = false;
+let solarOn = false;
+
 function resumeAnimations() {
     earthSpin.style.animationPlayState = 'running';
     earthRotate.style.animationPlayState = 'running';
@@ -51,8 +54,13 @@ function resumeAnimations() {
         incrementDate();
     }, 300); // 5000 milliseconds = 5 seconds 
 
-    if (document.querySelector('#moon').style.backgroundColor === "#0d1321"){
-        document.querySelector('#moon').style.animation = "backgroundChange 2s linear";
+    if (lunarOn){
+        document.querySelector('#moon').style.animation = "backgroundChange 0.5s linear forwards";
+        lunarOn = false;
+    }
+
+    if (solarOn){
+        document.querySelector('#earth').style.filter = 'brightness(1)';
     }
 }
 
@@ -236,7 +244,6 @@ function checkDistanceRelationships() {
     const moonPosition = getPosition(moonElement);
 
     const sunEarthDistanceSquared = getDistanceSquared(sunPosition, earthPosition);
-    // const earthMoonDistanceSquared = getDistanceSquared(earthPosition, moonPosition);
     const sunMoonDistanceSquared = getDistanceSquared(sunPosition, moonPosition);
 
     reqval = sunMoonDistanceSquared - sunEarthDistanceSquared;
@@ -245,13 +252,16 @@ function checkDistanceRelationships() {
         init = 1;
         pauseAnimations();
         showPopup(2);
-        document.querySelector('#moon').style.backgroundColor = "#0d1321";
+        document.querySelector('#moon').style.animation = "backgroundChange2 1s linear forwards";
+        lunarOn = true;
     }
 
     if (Math.abs(reqval + 50000) <= 2000 && init != 2) {
         init = 2;
         pauseAnimations();
         showPopup(1);
+        solarOn = true;
+        document.querySelector('#earth').style.filter = 'brightness(0.5)';
     }
 }
 

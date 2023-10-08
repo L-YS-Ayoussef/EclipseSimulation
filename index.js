@@ -17,7 +17,6 @@ let intervalId;
 const initialDate = new Date();
 const currentDate = new Date();
 
-
 function startAnimations() {
     earthSpin.style.animation = 'spin-right 109.5s linear infinite';
     earthRotate.style.animation = 'spin-right 109.5s linear infinite, rotate-earth 10s linear infinite';
@@ -26,7 +25,8 @@ function startAnimations() {
     intervalId = setInterval(function() {
         incrementDate();
     }, 300); // 5000 milliseconds = 5 seconds
-        
+    
+    startButton.style.pointerEvents = "none";
 }
 
 function pauseAnimations() {
@@ -49,9 +49,11 @@ function resumeAnimations() {
 
     intervalId = setInterval(function() {
         incrementDate();
-    }, 300); // 5000 milliseconds = 5 seconds
-    
-    
+    }, 300); // 5000 milliseconds = 5 seconds 
+
+    if (document.querySelector('#moon').style.backgroundColor === "#0d1321"){
+        document.querySelector('#moon').style.animation = "backgroundChange 2s linear";
+    }
 }
 
 function resetAnimations() {
@@ -64,6 +66,11 @@ function resetAnimations() {
 
     currentDate.setTime(initialDate.getTime());
     displayDate();
+    
+    if (resumeButton.style.display == "inline-block"){
+        resumeButton.style.display = "none";
+    }
+    startButton.style.pointerEvents = "auto";
 }
 
 function speedUpAnimation() {
@@ -105,7 +112,7 @@ resetButton.addEventListener('click', resetAnimations);
 speedUpButton.addEventListener('click', speedUpAnimation);
 slowDownButton.addEventListener('click', slowDownAnimation);
 
-
+// ---------------------------------------------------------------------------
 
 const now = new Date();
 const dayOfYear = Math.floor(
@@ -137,6 +144,7 @@ styleElement.textContent = keyframes;
 earthSpin.style.transform = `rotate(${earthPosition}deg)`;
 moonSpin.style.transform = `rotate(${earthPosition}deg)`;
 
+// ----------------------------------------------------------------------------
 
 function displayDate() {
     // const currentDate = new Date();
@@ -144,29 +152,109 @@ function displayDate() {
     document.getElementById('dateDisplay').textContent = currentDate.toLocaleDateString(undefined, options);
 }
 
-
 function incrementDate() {
     currentDate.setDate(currentDate.getDate() + 1);
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     document.getElementById('dateDisplay').textContent = currentDate.toLocaleDateString(undefined, options);
 }
 
-
-//displayDate();
-
-function startAutoIncrement() {
-
-
-
-}
-
-// Start the auto-increment process when the page loads
 displayDate();
 
+// -----------------------------------------------------------------------
 
-// intervalId = setInterval(function() {
-//     incrementDate();
-// }, 300); // 5000 milliseconds = 5 seconds
+const scientificTexts = [
+    "An eclipse occurs when one celestial object moves into the shadow cast by another celestial object. Here, we will watch the Earth and moon motion till the eclipse happens.",
+    "In the case of a solar eclipse, the moon passes between the Earth and the Sun, blocking out the Sun's light for a brief period.",
+    "During a lunar eclipse, the Earth comes between the Sun and the Moon, casting a shadow on the Moon's surface."
+];
 
 
-// clearInterval(intervalId);
+// Get the popup and close button elements
+const popup = document.getElementById('popup');
+const closePopup = document.getElementById('close-popup');
+
+// Function to show the popup
+function showPopup(index) {
+    const scientificTextElement = document.getElementById('scientific-text');
+    const title = document.getElementById('popupTitle');
+    scientificTextElement.textContent = scientificTexts[index];
+    if (index === 0){
+        title.textContent = "Welcome To Eclipse.";
+    }
+    if (index === 1) {
+        title.textContent = "Solar Eclipse!";
+    }
+    if (index === 2) {
+        title.textContent = "Lunar Eclipse!";
+    }
+    popup.style.display = 'block';
+}
+
+// Function to close the popup
+function closePopupDialog() {
+    popup.style.display = 'none';
+    // startButton.click();
+}
+
+// Show the popup when the page loads (you can trigger this function at your desired time)
+window.onload = function () {
+    showPopup(0);
+};
+
+// Close the popup when the close button is clicked
+closePopup.addEventListener('click', closePopupDialog);
+
+// Close the popup when the user clicks outside of it
+window.addEventListener('click', (event) => {
+    if (event.target === popup) {
+        closePopupDialog();
+    }
+});
+
+// -------------------------------------------------------------------------
+
+const sunElement = document.querySelector('#sun');
+const earthElement = document.querySelector('#earth');
+const moonElement = document.querySelector('#moon');
+
+function getPosition(element) {
+    const rect = element.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    return { x: centerX, y: centerY };
+}
+function getDistanceSquared(point1, point2) {
+    const dx = point1.x - point2.x;
+    const dy = point1.y - point2.y;
+    return dx * dx + dy * dy;
+}
+init = -1;
+
+function checkDistanceRelationships() {
+    const sunPosition = getPosition(sunElement);
+    const earthPosition = getPosition(earthElement);
+    const moonPosition = getPosition(moonElement);
+
+    const sunEarthDistanceSquared = getDistanceSquared(sunPosition, earthPosition);
+    // const earthMoonDistanceSquared = getDistanceSquared(earthPosition, moonPosition);
+    const sunMoonDistanceSquared = getDistanceSquared(sunPosition, moonPosition);
+
+    reqval = sunMoonDistanceSquared - sunEarthDistanceSquared;
+
+    if (Math.abs(reqval - 75000) <= 2000 && init != 1) {
+        init = 1;
+        pauseAnimations();
+        showPopup(2);
+        document.querySelector('#moon').style.backgroundColor = "#0d1321";
+    }
+
+    if (Math.abs(reqval + 50000) <= 2000 && init != 2) {
+        init = 2;
+        pauseAnimations();
+        showPopup(1);
+    }
+}
+
+
+setInterval(checkDistanceRelationships, 10); 
+

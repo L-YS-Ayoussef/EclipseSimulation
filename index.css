@@ -345,7 +345,8 @@ body {
     border-radius: 10px;
     font-size: 18px;
     font-weight: 600;
-
+    pointer-events: none;
+    display: none;
 }
 
 #resume-button {
@@ -355,7 +356,7 @@ body {
     border-radius: 10px;
     font-size: 18px;
     font-weight: 600;
-
+    display: none;
 }
 
 #reset-button {
@@ -365,7 +366,7 @@ body {
     border-radius: 10px;
     font-size: 18px;
     font-weight: 600;
-
+    pointer-events: none;
 }
 
 #speed-up-button {
@@ -375,7 +376,7 @@ body {
     border-radius: 10px;
     font-size: 18px;
     font-weight: 600;
-
+    display: none;
 }
 
 #slow-down-button {
@@ -385,7 +386,7 @@ body {
     border-radius: 10px;
     font-size: 18px;
     font-weight: 600;
-
+    display: none;
 }
 
 

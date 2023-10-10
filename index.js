@@ -27,6 +27,8 @@ function startAnimations() {
     }, 300); // 5000 milliseconds = 5 seconds
     
     startButton.style.pointerEvents = "none";
+    resetButton.style.pointerEvents = "auto";
+    pauseButton.style.display = "inline-block";
 }
 
 function pauseAnimations() {
@@ -35,9 +37,10 @@ function pauseAnimations() {
     moonSpin.style.animationPlayState = 'paused';
 
     resumeButton.style.display = "inline-block";
+    pauseButton.style.display = "none";
+    resetButton.style.pointerEvents = "auto";
 
     clearInterval(intervalId);
-
 }
 
 let lunarOn = false;
@@ -49,6 +52,9 @@ function resumeAnimations() {
     moonSpin.style.animationPlayState = 'running';
 
     resumeButton.style.display = "none";
+    pauseButton.style.display = "inline-block";
+    pauseButton.style.pointerEvents = "auto";
+    resetButton.style.pointerEvents = "auto";
 
     intervalId = setInterval(function() {
         incrementDate();
@@ -68,17 +74,22 @@ function resetAnimations() {
     earthSpin.style.animation = null;
     earthRotate.style.animation = null;
     moonSpin.style.animation = null;
-    
+    document.querySelector('#moon').style.animation = null;
+    document.querySelector('#earth').style.filter = 'brightness(1)';
+
     clearInterval(intervalId);
     
 
     currentDate.setTime(initialDate.getTime());
     displayDate();
     
-    if (resumeButton.style.display == "inline-block"){
-        resumeButton.style.display = "none";
-    }
+    resumeButton.style.display = "none";
+    pauseButton.style.display = "none";
+
     startButton.style.pointerEvents = "auto";
+    resetButton.style.pointerEvents = "none";
+
+    popup.style.display = 'none';
 }
 
 function speedUpAnimation() {
@@ -189,14 +200,18 @@ function showPopup(index) {
     scientificTextElement.textContent = scientificTexts[index];
     if (index === 0){
         title.textContent = "Welcome To Eclipse.";
+        resetButton.style.pointerEvents = "none";
     }
     if (index === 1) {
         title.textContent = "Solar Eclipse!";
+        resetButton.style.pointerEvents = "auto";
     }
     if (index === 2) {
         title.textContent = "Lunar Eclipse!";
+        resetButton.style.pointerEvents = "auto";
     }
     popup.style.display = 'block';
+   
 }
 
 // Function to close the popup
@@ -264,7 +279,7 @@ function checkDistanceRelationships() {
         pauseAnimations();
         showPopup(1);
         solarOn = true;
-        document.querySelector('#earth').style.filter = 'brightness(0.5)';
+        document.querySelector('#earth').style.filter = 'brightness(0.3)';
     }
 }
 

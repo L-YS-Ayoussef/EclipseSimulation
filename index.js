@@ -180,6 +180,7 @@ const scientificTexts = [
 // Get the popup and close button elements
 const popup = document.getElementById('popup');
 const closePopup = document.getElementById('close-popup');
+const popBtn = document.getElementById('popBtn');
 
 // Function to show the popup
 function showPopup(index) {
@@ -211,13 +212,15 @@ window.onload = function () {
 
 // Close the popup when the close button is clicked
 closePopup.addEventListener('click', closePopupDialog);
+popBtn.addEventListener('click', closePopupDialog);
+
 
 // Close the popup when the user clicks outside of it
-window.addEventListener('click', (event) => {
-    if (event.target === popup) {
-        closePopupDialog();
-    }
-});
+// window.addEventListener('click', (event) => {
+//     if (event.target === popup) {
+//         closePopupDialog();
+//     }
+// });
 
 // -------------------------------------------------------------------------
 

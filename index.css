@@ -152,10 +152,12 @@ body {
     width: 780px;
     height: 780px;
     margin: auto;
+    margin-top: 6%;
+    margin-right: 8%;
 }
 
 .orbit {
-    border: 1px dashed black;
+    border: 1px dashed #eee;
 }
 
 #sun,
@@ -229,7 +231,7 @@ body {
     width: 185px;
     margin-top: -95px;
     margin-left: -95px;
-    border-color: black;
+    border-color: #eee;
 }
 
 
@@ -419,13 +421,15 @@ body {
 
 .popup-content {
     position: absolute;
-    top: 30%;
-    left: 75%;
+    top: 53%;
+    left: 23%;
     transform: translate(-50%, -50%);
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 365px;
+
 }
 
 .close {
@@ -583,4 +587,23 @@ p {
     margin-left: 10px;
     font-size: 20px;
     vertical-align: middle;
+}
+
+.popDivBtn
+{
+    text-align: center;
+}
+
+.popBtn
+{
+    background-color: #289d31;
+    color: white;
+    border: solid white 1px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 20px;
+    /* margin: 5px; */
+    margin: auto;
+    cursor: pointer;
 }

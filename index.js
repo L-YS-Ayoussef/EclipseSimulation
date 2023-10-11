@@ -13,6 +13,8 @@ let earthAnimation;
 let earthRotateAnimation;
 let moonAnimation;
 let intervalId;
+let eclipseNumbers = 0;
+
 
 const initialDate = new Date();
 const currentDate = new Date();
@@ -190,11 +192,13 @@ function showPopup(index) {
     if (index === 0){
         title.textContent = "Welcome To Eclipse.";
     }
-    if (index === 1) {
+    if (index === 1 && eclipseNumbers < 2) {
         title.textContent = "Solar Eclipse!";
+        eclipseNumbers++;
     }
-    if (index === 2) {
+    if (index === 2 && eclipseNumbers < 2) {
         title.textContent = "Lunar Eclipse!";
+        eclipseNumbers++;
     }
     popup.style.display = 'block';
 }

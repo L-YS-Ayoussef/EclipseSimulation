@@ -1,6 +1,6 @@
 const startButton = document.getElementById('start-button');
 const pauseButton = document.getElementById('pause-button');
-const resumeButton = document.getElementById('resume-button');
+// const resumeButton = document.getElementById('resume-button');
 const resetButton = document.getElementById('reset-button');
 const speedUpButton = document.getElementById('speed-up-button');
 const slowDownButton = document.getElementById('slow-down-button');
@@ -8,51 +8,33 @@ const slowDownButton = document.getElementById('slow-down-button');
 const earthSpin = document.querySelector('.earth-spin');
 const earthRotate = document.querySelector('#earth');
 const moonSpin = document.querySelector('.moon-spin');
+const controlPanel =  document.querySelector('.control-panel');
 
 let earthAnimation;
 let earthRotateAnimation;
 let moonAnimation;
 let intervalId;
+let eclipseNumbers = 0;
+let tutorialMode = 1;
+
 
 const initialDate = new Date();
 const currentDate = new Date();
+
+controlPanel.style.pointerEvents = "none";
+
 
 function startAnimations() {
     earthSpin.style.animation = 'spin-right 109.5s linear infinite';
     earthRotate.style.animation = 'spin-right 109.5s linear infinite, rotate-earth 10s linear infinite';
     moonSpin.style.animation = 'spin-right 3s linear infinite'; 
 
+
     intervalId = setInterval(function() {
         incrementDate();
     }, 300); // 5000 milliseconds = 5 seconds
     
-    startButton.style.pointerEvents = "none";
-}
-
-function pauseAnimations() {
-    earthSpin.style.animationPlayState = 'paused';
-    earthRotate.style.animationPlayState = 'paused';
-    moonSpin.style.animationPlayState = 'paused';
-
-    resumeButton.style.display = "inline-block";
-
-    clearInterval(intervalId);
-
-}
-
-let lunarOn = false;
-let solarOn = false;
-
-function resumeAnimations() {
-    earthSpin.style.animationPlayState = 'running';
-    earthRotate.style.animationPlayState = 'running';
-    moonSpin.style.animationPlayState = 'running';
-
-    resumeButton.style.display = "none";
-
-    intervalId = setInterval(function() {
-        incrementDate();
-    }, 300); // 5000 milliseconds = 5 seconds 
+    //startButton.style.pointerEvents = "none";
 
     if (lunarOn){
         document.querySelector('#moon').style.animation = "backgroundChange 0.5s linear forwards";
@@ -62,7 +44,42 @@ function resumeAnimations() {
     if (solarOn){
         document.querySelector('#earth').style.filter = 'brightness(1)';
     }
+
+    startButton.style.pointerEvents = "none";
+
+    if(tutorialMode == 0)
+    {
+    pauseButton.style.pointerEvents = "all";
+    }
+
+    if(eclipseNumbers >= 2)
+    {
+        tutorialMode = 0;
+    }
+
+
 }
+
+function pauseAnimations() {
+    earthSpin.style.animationPlayState = 'paused';
+    earthRotate.style.animationPlayState = 'paused';
+    moonSpin.style.animationPlayState = 'paused';
+
+    // resumeButton.style.display = "inline-block";
+
+    clearInterval(intervalId);
+
+    if(tutorialMode == 0)
+    {
+    pauseButton.style.pointerEvents = "none";
+    startButton.style.pointerEvents = "all";
+    }
+
+}
+
+let lunarOn = false;
+let solarOn = false;
+
 
 function resetAnimations() {
     earthSpin.style.animation = null;
@@ -75,10 +92,12 @@ function resetAnimations() {
     currentDate.setTime(initialDate.getTime());
     displayDate();
     
-    if (resumeButton.style.display == "inline-block"){
-        resumeButton.style.display = "none";
-    }
-    startButton.style.pointerEvents = "auto";
+
+
+
+    pauseButton.style.pointerEvents = "none";
+    startButton.style.pointerEvents = "all";
+    
 }
 
 function speedUpAnimation() {
@@ -115,7 +134,7 @@ function slowDownAnimation() {
 
 startButton.addEventListener('click', startAnimations);
 pauseButton.addEventListener('click', pauseAnimations);
-resumeButton.addEventListener('click', resumeAnimations);
+// resumeButton.addEventListener('click', resumeAnimations);
 resetButton.addEventListener('click', resetAnimations);
 speedUpButton.addEventListener('click', speedUpAnimation);
 slowDownButton.addEventListener('click', slowDownAnimation);
@@ -182,6 +201,10 @@ const popup = document.getElementById('popup');
 const closePopup = document.getElementById('close-popup');
 const popBtn = document.getElementById('popBtn');
 
+
+popBtn.addEventListener('click', startAnimations);
+
+
 // Function to show the popup
 function showPopup(index) {
     const scientificTextElement = document.getElementById('scientific-text');
@@ -190,11 +213,13 @@ function showPopup(index) {
     if (index === 0){
         title.textContent = "Welcome To Eclipse.";
     }
-    if (index === 1) {
+    if (index === 1 && eclipseNumbers < 2) {
         title.textContent = "Solar Eclipse!";
+        eclipseNumbers++;
     }
-    if (index === 2) {
+    if (index === 2 && eclipseNumbers < 2) {
         title.textContent = "Lunar Eclipse!";
+        eclipseNumbers++;
     }
     popup.style.display = 'block';
 }
@@ -251,7 +276,7 @@ function checkDistanceRelationships() {
 
     reqval = sunMoonDistanceSquared - sunEarthDistanceSquared;
 
-    if (Math.abs(reqval - 75000) <= 2000 && init != 1) {
+    if (Math.abs(reqval - 75000) <= 2000 && init != 1  && eclipseNumbers < 2) {
         init = 1;
         pauseAnimations();
         showPopup(2);
@@ -259,12 +284,17 @@ function checkDistanceRelationships() {
         lunarOn = true;
     }
 
-    if (Math.abs(reqval + 50000) <= 2000 && init != 2) {
+    if (Math.abs(reqval + 50000) <= 2000 && init != 2 && eclipseNumbers < 2 ) {
         init = 2;
         pauseAnimations();
         showPopup(1);
         solarOn = true;
         document.querySelector('#earth').style.filter = 'brightness(0.5)';
+    }
+
+    if (tutorialMode == 0)
+    {
+    controlPanel.style.pointerEvents = "all";
     }
 }
 

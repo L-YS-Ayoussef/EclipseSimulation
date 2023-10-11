@@ -58,6 +58,7 @@ function startAnimations() {
     }
 
 
+
 }
 
 function pauseAnimations() {
@@ -81,18 +82,20 @@ let lunarOn = false;
 let solarOn = false;
 
 
+
 function resetAnimations() {
     earthSpin.style.animation = null;
     earthRotate.style.animation = null;
     moonSpin.style.animation = null;
-    
+    document.querySelector('#moon').style.animation = null;
+    document.querySelector('#earth').style.filter = 'brightness(1)';
+
     clearInterval(intervalId);
     
 
     currentDate.setTime(initialDate.getTime());
     displayDate();
     
-
 
 
     pauseButton.style.pointerEvents = "none";
@@ -212,16 +215,20 @@ function showPopup(index) {
     scientificTextElement.textContent = scientificTexts[index];
     if (index === 0){
         title.textContent = "Welcome To Eclipse.";
+        resetButton.style.pointerEvents = "none";
     }
     if (index === 1 && eclipseNumbers < 2) {
         title.textContent = "Solar Eclipse!";
         eclipseNumbers++;
+
     }
     if (index === 2 && eclipseNumbers < 2) {
         title.textContent = "Lunar Eclipse!";
         eclipseNumbers++;
+
     }
     popup.style.display = 'block';
+   
 }
 
 // Function to close the popup
@@ -289,7 +296,7 @@ function checkDistanceRelationships() {
         pauseAnimations();
         showPopup(1);
         solarOn = true;
-        document.querySelector('#earth').style.filter = 'brightness(0.5)';
+        document.querySelector('#earth').style.filter = 'brightness(0.3)';
     }
 
     if (tutorialMode == 0)

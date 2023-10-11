@@ -18,7 +18,7 @@ const questions = [
     {
         question: "During a lunar eclipse, what gets blocked out?",
         choices: ["Earth's light", "Moon's light", "Sun's light"],
-        correctAnswer: 0
+        correctAnswer: 1
     }
 ];
 

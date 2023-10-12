@@ -19,7 +19,7 @@
     <body>
 
 
-
+    <nav>
         <div class="control-panel">
             <button id="start-button">Start</button>
             <button id="pause-button">Pause</button>
@@ -28,7 +28,18 @@
             <button id="speed-up-button">Speed Up</button>
             <button id="slow-down-button">Slow Down</button>
         </div>
+        
+        <!-- Start Quiz Button -->
+        <button id="start-quiz">Start Quiz</button>
+        
+    </nav>
 
+
+
+    <section class ="date-section">
+        <h1 class ="date">Date</h1>
+        <div id="dateDisplay"></div>
+    </section>
         
         <div id="galaxy">
             <div class="bg"></div>
@@ -37,6 +48,23 @@
             <div class="stars-front"></div>
             <div class="bg center"></div>
         </div>
+
+
+
+
+    <section class ="main">
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close" id="close-popup">&times;</span>
+                <h2 id="popupTitle"></h2>
+                <p id="scientific-text"></p>
+
+                <div class ="popDivBtn">
+                <button class ="popBtn" id ="popBtn">Next</button>
+                </div>
+            </div>
+        </div>
+
 
         <div class="solar-system">
             <div id="sun"></div>
@@ -52,25 +80,11 @@
                     src="https://raw.githubusercontent.com/everdimension-personal/codepen-assets/master/earth_small_150.jpg" />
             </div>
         </div>
-
-        <h1 class ="date">Date</h1>
-        <div id="dateDisplay"></div>
-
-        <div id="popup" class="popup">
-            <div class="popup-content">
-                <span class="close" id="close-popup">&times;</span>
-                <h2 id="popupTitle"></h2>
-                <p id="scientific-text"></p>
-
-                <div class ="popDivBtn">
-                <button class ="popBtn" id ="popBtn">Next</button>
-                </div>
-            </div>
-        </div>
+        
+    </section>
 
 
-        <!-- Start Quiz Button -->
-        <button id="start-quiz">Start Quiz</button>
+
         
         <!-- Popup Quiz Container -->
         <div id="quiz-popup" class="quiz-popup">

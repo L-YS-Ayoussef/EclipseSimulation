@@ -146,14 +146,18 @@ body {
     opacity: 1;
   }
 
+nav
+{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin: 41px 57px;}
+
+
 
 .solar-system {
     position: relative;
-    width: 780px;
-    height: 780px;
-    margin: auto;
-    margin-top: 6%;
-    margin-right: 8%;
+    width: 70%;
 }
 
 .orbit {
@@ -303,12 +307,7 @@ body {
 
 
 .control-panel {
-    position: absolute;
-    top: 30px; 
-    left: 30px; 
-    z-index: 1001; 
-    margin-top: 30px;
-    margin-left: 20px;
+    z-index: 1001;
 }
 
 .control-panel button {
@@ -391,45 +390,38 @@ body {
 
 .date
 {
-    position: absolute;
-    top: 11%;
-    left: 5%;
+
     font-size: 41px;
     color:white;
+    margin-bottom:0;    
 }
 
 #dateDisplay
 {
-    position: absolute;
-    top: 23%;
-    left: 5%;
     font-size: 31px;
     color:white;
 }
 
 /* Popup Styles */
 .popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* background-color: rgba(0, 0, 0, 0.8); */
     z-index: 1000;
+    width:30%;
+    margin-left:50px;
 }
 
 .popup-content {
-    position: absolute;
-    top: 53%;
-    left: 23%;
-    transform: translate(-50%, -50%);
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     width: 365px;
+}
 
+.main
+{
+    display: flex;
+    justify-content: space-around;
+    margin: 99px 0;
 }
 
 .close {
@@ -475,9 +467,7 @@ p {
 
 
 #start-quiz {
-    position: absolute;
-    top: 35px;
-    right: 30px;
+
 
     padding: 10px 20px;
     cursor: pointer;
@@ -495,6 +485,12 @@ p {
     transform-origin: center; /* Scale from the center */
 
 
+}
+
+
+.date-section
+{
+    margin: -17px 73px;
 }
 
 #start-quiz:hover {
@@ -607,3 +603,43 @@ p {
     margin: auto;
     cursor: pointer;
 }
+
+
+@media (max-width: 1150px) {
+    nav, .date-section, .main {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    
+    .main
+    {
+        transform: scale(0.55);
+        justify-content: space-between;
+        height:690px;
+    }
+
+    .popup
+    {
+        width: auto;
+        margin-left: 0;
+    }
+
+    .solar-system
+    {
+        width:auto;
+    }
+
+    /* Adjust other styles as needed for smaller screens */
+    nav {
+        margin: 20px;
+    }
+
+    .date-section {
+        margin: 20px;
+    }
+}
+
+
+
+
+

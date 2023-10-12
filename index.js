@@ -221,12 +221,13 @@ function showPopup(index) {
         title.textContent = "Lunar Eclipse!";
         eclipseNumbers++;
     }
-    popup.style.display = 'block';
+    popup.style.visibility = 'visible';
+
 }
 
 // Function to close the popup
 function closePopupDialog() {
-    popup.style.display = 'none';
+    popup.style.visibility = 'hidden';
     // startButton.click();
 }
 

@@ -24,7 +24,6 @@ You can experience the simulation here:
 
 ## 📜 License  
 
-This project is **closed-source** and is not available for public modification or distribution.  
-Cloning or forking this repository **requires explicit permission from the author**.  
+⚠️ **Important Notice:** This repository is publicly available for viewing only. Forking, cloning, or redistributing this project is **NOT** permitted without explicit permission. 
 
-**© 2025 Nasa Space App Team. All rights reserved.**  
+**© 2023 Nasa Space App Team. All rights reserved.**  
